@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Layout as AntLayout } from 'antd';
 import LeftSidebar from './left-sidebar/LeftSidebar';
 import RightSidebar from './right-sidebar/RightSidebar';
@@ -15,17 +15,17 @@ const Layout: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
 }) => {
   const setProfile = useSetAtom(profileAtom);
   const setIsProfileLoading = useSetAtom(isLoadingProfileAtom);
-  const { isLoading } = useQuery({
+  useQuery({
     queryKey: ['getUser'],
     queryFn: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      setIsProfileLoading(true);
       const profile = await getProfile();
       setProfile(profile);
+      setIsProfileLoading(false);
+      return profile;
     },
   });
-  useEffect(() => {
-    setIsProfileLoading(isLoading);
-  }, [setIsProfileLoading, isLoading]);
+
   return (
     <AntLayout className={styles.layout}>
       <AntLayout>

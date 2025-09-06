@@ -4,17 +4,22 @@ import { PixabayData, PixabayResponse } from '../../types/pixabay.type';
 
 const PIXABAY_API_KEY = process.env.REACT_APP_PIXABAY_API_KEY;
 export const getPost = async (query?: PostQuery) => {
-  const pixabayPost = await getPostFromPixabay(query);
+  try {
+    const pixabayPost = await getPostFromPixabay(query);
 
-  const posts: PostData[] = pixabayPost.hits.map((photo: PixabayData) => ({
-    id: photo.id,
-    user: photo.user,
-    caption: photo.tags,
-    imageUrl: photo.webformatURL,
-    likes: photo.likes,
-    isLiked: false,
-  }));
-  return posts;
+    const posts: PostData[] = pixabayPost.hits.map((photo: PixabayData) => ({
+      id: photo.id,
+      username: photo.user,
+      userImageURL: photo.userImageURL,
+      caption: photo.tags,
+      imageUrl: photo.webformatURL,
+      likes: photo.likes,
+      isLiked: false,
+    }));
+    return posts;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getPostFromPixabay = async (query?: PostQuery) => {

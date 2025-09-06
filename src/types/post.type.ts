@@ -10,7 +10,8 @@ export type PostsResponse = {
 
 export type PostData = {
   id: number;
-  user: string;
+  username: string;
+  userImageURL: string;
   caption: string;
   imageUrl: string;
   likes: number;

@@ -12,6 +12,8 @@ import {
   MenuOutlined,
   InstagramOutlined,
 } from '@ant-design/icons';
+import { useAtom } from 'jotai';
+import { searchQueryAtom } from '../../../atoms/search.atom';
 import styles from './LeftSidebar.module.css';
 
 const { useBreakpoint } = Grid;
@@ -32,6 +34,7 @@ const LeftSidebar: React.FC = () => {
   const screens = useBreakpoint();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isShowSearchDrawer, setIsShowSearchDrawer] = useState(false);
+  const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
 
   useEffect(() => {
     if (screens.md) setIsCollapsed(false);
@@ -45,6 +48,10 @@ const LeftSidebar: React.FC = () => {
 
   const closeDrawer = () => {
     setIsShowSearchDrawer(false);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -71,7 +78,12 @@ const LeftSidebar: React.FC = () => {
         onClose={closeDrawer}
         open={isShowSearchDrawer}
       >
-        <Input className={styles.searchInput} placeholder="ค้นหา" />
+        <Input
+          className={styles.searchInput}
+          placeholder="ค้นหา"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
       </Drawer>
     </div>
   );
