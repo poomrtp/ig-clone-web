@@ -1,11 +1,12 @@
-import React from 'react';
 import { ConfigProvider } from 'antd';
-import Layout from './components/layout/Layout';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import FeedPage from './pages/feed/FeedPage';
+import PostPage from './pages/post/PostPage';
+import { Provider } from 'jotai';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <ConfigProvider
       theme={{
@@ -16,13 +17,17 @@ function App() {
         },
       }}
     >
-      <BrowserRouter>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<FeedPage />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <Provider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<PostPage />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </Provider>
     </ConfigProvider>
   );
 }

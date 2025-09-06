@@ -3,7 +3,7 @@ import Layout from '../../components/layout/Layout';
 import MainContent from '../../components/main-content/MainContent';
 import StoryList from '../../components/story-list/StoryList';
 
-const FeedPage: React.FC = () => {
+const PostPage: React.FC = () => {
   return (
     <Layout>
       <StoryList />
@@ -12,4 +12,4 @@ const FeedPage: React.FC = () => {
   );
 };
 
-export default FeedPage;
+export default PostPage;
