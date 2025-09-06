@@ -1,0 +1,86 @@
+.rightSidebar {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.currentUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.userInfo {
+  flex: 1;
+}
+
+.username {
+  color: #ffffff !important;
+  font-size: 14px;
+  display: block;
+}
+
+.displayName {
+  color: #8e8e8e !important;
+  font-size: 12px;
+}
+
+.linkButton {
+  color: #0095f6 !important;
+  font-size: 14px;
+  padding: 0;
+}
+
+.suggestions {
+  margin-bottom: 24px;
+}
+
+.suggestionsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.suggestionsTitle {
+  color: #8e8e8e !important;
+  font-size: 14px;
+}
+
+.seeAllButton {
+  color: #ffffff !important;
+  font-size: 14px;
+  padding: 0;
+}
+
+.suggestionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.suggestionItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.suggestionAvatar {
+  background-color: #ffffff;
+}
+
+.suggestionInfo {
+  flex: 1;
+}
+
+.suggestionUsername {
+  color: #ffffff !important;
+  font-size: 14px;
+  display: block;
+}
+
+.suggestionFollowers {
+  color: #8e8e8e !important;
+  font-size: 12px;
+}

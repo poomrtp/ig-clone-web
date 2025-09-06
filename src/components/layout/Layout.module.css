@@ -1,0 +1,24 @@
+.layout {
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.leftSidebar {
+  background-color: #000000 !important;
+  border-right: 1px solid #262626;
+}
+
+.rightSidebar {
+  background-color: #000000 !important;
+  border-left: 1px solid #262626;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .rightSidebar {
+    display: none;
+  }
+}

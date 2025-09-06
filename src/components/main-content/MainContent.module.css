@@ -1,0 +1,14 @@
+.mainContent {
+  padding: 20px 0;
+  max-width: 614px;
+  margin: 0 auto;
+  min-height: calc(100vh - 120px);
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: yellow;
+  min-height: 360px;
+}
