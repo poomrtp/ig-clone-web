@@ -57,7 +57,7 @@ const Post: React.FC<PostProps> = ({
     <Card className={styles.post}>
       <div className={styles.postHeader}>
         <div className={styles.userInfo}>
-          <Avatar src={userImageURL} size="large" />
+          <Avatar src={userImageURL} alt="user profile image" size="large" />
           <Text strong className={styles.usernameText}>
             {username}
           </Text>
@@ -81,6 +81,7 @@ const Post: React.FC<PostProps> = ({
           <Button
             type="text"
             shape="circle"
+            aria-label="like-btn"
             icon={isCurrentLike ? <HeartFilled /> : <HeartOutlined />}
             className={`${styles.likeButton} ${isCurrentLike ? styles.active : ''}`}
             onClick={handleClickLike}
