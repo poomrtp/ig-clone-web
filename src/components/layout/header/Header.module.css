@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #000000;
+  border-bottom: 1px solid #262626;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  width: 100%;
+  padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+  .header {
+    display: none;
+  }
+}

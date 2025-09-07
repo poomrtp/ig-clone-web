@@ -9,16 +9,23 @@
 .leftSidebar {
   background-color: #000000 !important;
   border-right: 1px solid #262626;
+  display: none;
 }
 
 .rightSidebar {
   background-color: #000000 !important;
   border-left: 1px solid #262626;
+  display: none;
 }
 
-/* Responsive breakpoints */
-@media (max-width: 1200px) {
+@media (min-width: 768px) {
+  .leftSidebar {
+    display: block;
+  }
+}
+
+@media (min-width: 1200px) {
   .rightSidebar {
-    display: none;
+    display: block;
   }
 }

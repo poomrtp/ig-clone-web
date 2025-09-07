@@ -11,6 +11,12 @@ import {
   UserOutlined,
   MenuOutlined,
   InstagramOutlined,
+  HomeFilled,
+  CompassFilled,
+  PlayCircleFilled,
+  MessageFilled,
+  HeartFilled,
+  PlusCircleFilled,
 } from '@ant-design/icons';
 import { useAtom } from 'jotai';
 import { searchQueryAtom } from '../../../atoms/search.atom';
@@ -19,22 +25,52 @@ import styles from './LeftSidebar.module.css';
 const { useBreakpoint } = Grid;
 
 const LeftSidebar: React.FC = () => {
-  const navigationItems = [
-    { key: 'home', icon: <HomeOutlined />, label: 'หน้าหลัก' },
-    { key: 'search', icon: <SearchOutlined />, label: 'ค้นหา' },
-    { key: 'explore', icon: <CompassOutlined />, label: 'สำรวจ' },
-    { key: 'reels', icon: <PlayCircleOutlined />, label: 'Reels' },
-    { key: 'messages', icon: <MessageOutlined />, label: 'ข้อความ' },
-    { key: 'notifications', icon: <HeartOutlined />, label: 'การแจ้งเตือน' },
-    { key: 'create', icon: <PlusOutlined />, label: 'สร้าง' },
-    { key: 'profile', icon: <UserOutlined />, label: 'โปรไฟล์' },
-    { key: 'more', icon: <MenuOutlined />, label: 'เพิ่มเติม' },
-  ];
-
   const screens = useBreakpoint();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isShowSearchDrawer, setIsShowSearchDrawer] = useState(false);
   const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
+  const [selected, setSelected] = useState('home');
+
+  const navigationItems = [
+    {
+      key: 'home',
+      icon: selected === 'home' ? <HomeFilled /> : <HomeOutlined />,
+      label: 'หน้าหลัก',
+    },
+    { key: 'search', icon: <SearchOutlined />, label: 'ค้นหา' },
+    {
+      key: 'explore',
+      icon: selected === 'explore' ? <CompassFilled /> : <CompassOutlined />,
+      label: 'สำรวจ',
+    },
+    {
+      key: 'reels',
+      icon:
+        selected === 'reels' ? <PlayCircleFilled /> : <PlayCircleOutlined />,
+      label: 'Reels',
+    },
+    {
+      key: 'messages',
+      icon: selected === 'messages' ? <MessageFilled /> : <MessageOutlined />,
+      label: 'ข้อความ',
+    },
+    {
+      key: 'notifications',
+      icon: selected === 'notifications' ? <HeartFilled /> : <HeartOutlined />,
+      label: 'การแจ้งเตือน',
+    },
+    {
+      key: 'create',
+      icon: selected === 'create' ? <PlusCircleFilled /> : <PlusOutlined />,
+      label: 'สร้าง',
+    },
+    {
+      key: 'profile',
+      icon: selected === 'profile' ? <UserOutlined /> : <UserOutlined />,
+      label: 'โปรไฟล์',
+    },
+    { key: 'more', icon: <MenuOutlined />, label: 'เพิ่มเติม' },
+  ];
 
   useEffect(() => {
     if (screens.md) setIsCollapsed(false);
@@ -42,6 +78,7 @@ const LeftSidebar: React.FC = () => {
   }, [screens]);
 
   const handleMenuClick = ({ key }: { key: string }) => {
+    setSelected(key);
     if (key === 'search') setIsShowSearchDrawer(true);
     else setIsShowSearchDrawer(false);
   };
@@ -65,7 +102,7 @@ const LeftSidebar: React.FC = () => {
       </div>
       <Menu
         mode="inline"
-        selectedKeys={['home']}
+        selectedKeys={[selected]}
         inlineCollapsed={isCollapsed}
         className={styles.menu}
         items={navigationItems}
@@ -79,7 +116,7 @@ const LeftSidebar: React.FC = () => {
         open={isShowSearchDrawer}
       >
         <Input
-          className={styles.searchInput}
+          className="searchInput"
           placeholder="ค้นหา"
           value={searchQuery}
           onChange={handleSearchChange}

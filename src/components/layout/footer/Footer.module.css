@@ -1,0 +1,52 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  background-color: #000000;
+  border-bottom: 1px solid #262626;
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  width: 100%;
+  padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    display: none;
+  }
+}
+
+.menu :global(.ant-menu-item) {
+  color: #ffffff;
+  height: 48px;
+  width: 48px;
+  line-height: 48px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.menu :global(.ant-menu-item:hover) {
+  background-color: #262626;
+}
+
+.menu :global(.ant-menu-item::after),
+.menu :global(.ant-menu-item:hover::after) {
+  display: none;
+}
+
+.menu :global(.ant-menu-item-selected::after) {
+  display: none;
+}
+
+.menu :global(.ant-menu-item-selected) {
+  background-color: transparent;
+  color: #ffffff !important;
+}
+
+.menu :global(.ant-menu-title-content) :global(.anticon) {
+  font-size: 18px;
+}
+
+.menu :global(.ant-menu-item-icon) {
+  font-size: 24px !important;
+}
