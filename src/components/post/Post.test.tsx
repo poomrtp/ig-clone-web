@@ -41,6 +41,9 @@ test('renders click like button', async () => {
   expect(likeBtn.className).not.toMatch(/active/);
   user.click(likeBtn);
   expect(likeBtn.className).toMatch(/active/);
+  expect(
+    screen.getByText(`ถูกใจ ${postData.likes + 1} คน`)
+  ).toBeInTheDocument();
 });
 
 test('click like button then click unlike button', async () => {
@@ -52,6 +55,11 @@ test('click like button then click unlike button', async () => {
 
   user.click(likeBtn);
   expect(likeBtn.className).toMatch(/active/);
+  expect(
+    screen.getByText(`ถูกใจ ${postData.likes + 1} คน`)
+  ).toBeInTheDocument();
   user.click(likeBtn);
   expect(likeBtn.className).not.toMatch(/active/);
+
+  // todo: try to mock useState or useMutation
 });
