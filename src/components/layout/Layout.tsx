@@ -26,6 +26,7 @@ const Layout: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
       setIsProfileLoading(false);
       return profile;
     },
+    staleTime: 60 * 1000,
   });
 
   return (

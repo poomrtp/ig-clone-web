@@ -12,6 +12,7 @@ const StoryList: React.FC = () => {
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ['getStories'],
     queryFn: () => getStories({ page, limit }),
+    staleTime: 60 * 1000,
   });
 
   const StoryLoading = () => (

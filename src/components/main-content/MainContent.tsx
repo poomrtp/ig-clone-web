@@ -6,9 +6,11 @@ import { getPost } from '../../services/post/post.service';
 import { searchQueryAtom } from '../../atoms/search.atom';
 import Post from '../post/Post';
 import PostSkeleton from '../post/PostSkeleton';
+import { useDebounce } from '../../hooks/debouce';
 
 const MainContent: React.FC = () => {
   const searchQuery = useAtomValue(searchQueryAtom);
+  const debouncedSearch = useDebounce(searchQuery, 1000);
   const limit = 5;
   const {
     data,
@@ -18,10 +20,10 @@ const MainContent: React.FC = () => {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ['getPost', searchQuery],
+    queryKey: ['getPost', debouncedSearch],
     queryFn: ({ pageParam = 1 }) =>
       getPost({
-        search: searchQuery,
+        search: debouncedSearch,
         page: pageParam,
         limit,
       }),
@@ -30,6 +32,7 @@ const MainContent: React.FC = () => {
       return allPages.length + 1;
     },
     initialPageParam: 1,
+    staleTime: 60 * 1000,
   });
 
   const posts = data?.pages.flat() || [];

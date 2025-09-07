@@ -17,6 +17,7 @@ const RightSidebar: React.FC = () => {
   const { data: suggestUsers } = useQuery({
     queryKey: ['getSuggestUsers'],
     queryFn: () => getSuggestUsers({ limit }),
+    staleTime: 60 * 1000,
   });
 
   const CurrentUserSkeleton = () => (
