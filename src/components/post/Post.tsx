@@ -26,6 +26,7 @@ const Post: React.FC<PostProps> = ({
   isLiked,
 }) => {
   const [isCurrentLike, setIsCurrentLike] = useState(isLiked);
+  const [currentLikes, setCurrentLikes] = useState(likes);
   const [expandedCaption, setExpandedCaption] = useState(false);
   const [isShowAnimateLike, setIsShowAnimateLike] = useState(false);
   const [likeId, setLikeId] = useState('');
@@ -44,11 +45,13 @@ const Post: React.FC<PostProps> = ({
     if (!isCurrentLike) {
       mutationLike.mutate({ postId: id, isLike: true });
       setIsShowAnimateLike(true);
+      setCurrentLikes((prev) => prev + 1);
       setTimeout(() => {
         setIsShowAnimateLike(false);
       }, 300);
     } else if (likeId) {
       mutationUnlike.mutate(likeId);
+      setCurrentLikes((prev) => prev - 1);
     }
     setIsCurrentLike((prev) => !prev);
   };
@@ -103,7 +106,7 @@ const Post: React.FC<PostProps> = ({
 
       <div className={styles.likes}>
         <Text strong className={styles.likesText}>
-          {likes > 0 && `ถูกใจ ${likes} คน`}
+          {likes > 0 && `ถูกใจ ${currentLikes} คน`}
         </Text>
       </div>
 
