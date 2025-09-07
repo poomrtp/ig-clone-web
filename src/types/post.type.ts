@@ -4,10 +4,6 @@ export type PostQuery = {
   page?: number;
 };
 
-export type PostsResponse = {
-  posts: PostData[];
-};
-
 export type PostData = {
   id: number;
   username: string;
@@ -16,4 +12,15 @@ export type PostData = {
   imageUrl: string;
   likes: number;
   isLiked: boolean;
+};
+
+export type CreateLikeDataPayload = {
+  postId: number;
+  isLike: boolean;
+};
+
+export type CreateLikeDataResponse = {
+  id: string;
+  postId: number;
+  isLike: boolean;
 };

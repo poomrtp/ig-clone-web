@@ -66,10 +66,6 @@
   gap: 12px;
 }
 
-.suggestionAvatar {
-  background-color: #ffffff;
-}
-
 .suggestionInfo {
   flex: 1;
 }

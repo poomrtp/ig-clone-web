@@ -31,6 +31,26 @@
   width: 100%;
   height: auto;
   overflow: hidden;
+  position: relative;
+}
+
+.likeAnimateIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #e1306c;
+  font-size: 68px;
+  animation: animateLikeEffect 0.3s ease-in-out;
+}
+
+@keyframes animateLikeEffect {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .likeButton,

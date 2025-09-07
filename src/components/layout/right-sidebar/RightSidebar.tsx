@@ -3,20 +3,21 @@ import { Avatar, Button, Typography, Skeleton } from 'antd';
 import styles from './RightSidebar.module.css';
 import { useAtomValue } from 'jotai';
 import { isLoadingProfileAtom, profileAtom } from '../../../atoms/profile.atom';
+import { useQuery } from '@tanstack/react-query';
+import { getSuggestUsers } from '../../../services/suggest-user/suggest-user.service';
 
 const { Text } = Typography;
 
 const RightSidebar: React.FC = () => {
-  const suggestions = [
-    { username: 'noda', followers: [] },
-    { username: 'yourness', followers: [] },
-    { username: 'ren', followers: [] },
-    { username: 'masuwo', followers: [] },
-    { username: 'suis', followers: [] },
-  ];
+  const limit = 5;
 
   const profile = useAtomValue(profileAtom);
   const isLoadingProfile = useAtomValue(isLoadingProfileAtom);
+
+  const { data: suggestUsers } = useQuery({
+    queryKey: ['getSuggestUsers'],
+    queryFn: () => getSuggestUsers({ limit }),
+  });
 
   const CurrentUserSkeleton = () => (
     <div className={styles.currentUser}>
@@ -70,14 +71,12 @@ const RightSidebar: React.FC = () => {
   return (
     <div className={styles.rightSidebar}>
       <div className={styles.currentUser}>
-        <Avatar size={56}>
-          <img src={profile.userImageURL} alt={`${profile.username} profile`} />
-        </Avatar>
+        <Avatar size={44} src={profile.userImageURL} />
         <div className={styles.userInfo}>
           <Text strong className={styles.username}>
             {profile.username}
           </Text>
-          <Text className={styles.displayName}>poomrtp</Text>
+          <Text className={styles.displayName}>{profile.username}</Text>
         </div>
         <Button type="link" className={styles.linkButton}>
           เปลี่ยน
@@ -94,11 +93,9 @@ const RightSidebar: React.FC = () => {
         </div>
 
         <div className={styles.suggestionsList}>
-          {suggestions.map((suggestion, index) => (
+          {suggestUsers?.map((suggestion, index) => (
             <div key={index} className={styles.suggestionItem}>
-              <Avatar size={32} className={styles.suggestionAvatar}>
-                {suggestion.username}
-              </Avatar>
+              <Avatar size={44} src={suggestion.userImageURL} />
               <div className={styles.suggestionInfo}>
                 <Text strong className={styles.suggestionUsername}>
                   {suggestion.username}

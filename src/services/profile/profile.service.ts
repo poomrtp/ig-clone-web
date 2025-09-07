@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { JSON_SERVER_API } from '../../config/json-server.config';
+import { Profile } from '../../types/profile.type';
 
-const ID = 1;
-
-export const getProfile = async () => {
-  const res = await axios.get(`http://localhost:3001/profiles/${ID}`);
+export const getProfile = async (): Promise<Profile> => {
+  const res = await axios.get<Profile>(`${JSON_SERVER_API}/profile`);
   return res.data;
 };

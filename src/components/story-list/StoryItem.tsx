@@ -10,9 +10,7 @@ type StoryItemProps = {
 const StoryItem: React.FC<StoryItemProps> = ({ name, imgUrl }) => {
   return (
     <div className={styles.storyItem}>
-      <Avatar size={56} className={styles.storyAvatar}>
-        <img src={imgUrl} alt={name} />
-      </Avatar>
+      <Avatar size={56} src={imgUrl} className={styles.storyAvatar} />
       <span className={styles.storyName}>{name}</span>
     </div>
   );

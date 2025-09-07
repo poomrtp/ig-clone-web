@@ -8,7 +8,9 @@ import {
   HeartFilled,
 } from '@ant-design/icons';
 import styles from './Post.module.css';
-import { PostData } from '../../types/post.type';
+import { CreateLikeDataPayload, PostData } from '../../types/post.type';
+import { useMutation } from '@tanstack/react-query';
+import { createLike, deleteLike } from '../../services/post/post.service';
 
 type PostProps = PostData;
 
@@ -25,12 +27,32 @@ const Post: React.FC<PostProps> = ({
 }) => {
   const [isCurrentLike, setIsCurrentLike] = useState(isLiked);
   const [expandedCaption, setExpandedCaption] = useState(false);
+  const [isShowAnimateLike, setIsShowAnimateLike] = useState(false);
+  const [likeId, setLikeId] = useState('');
+
+  const mutationLike = useMutation({
+    mutationFn: (payload: CreateLikeDataPayload) => createLike(payload),
+    onSuccess: (res) => setLikeId(res.id),
+  });
+
+  const mutationUnlike = useMutation({
+    mutationFn: (id: string) => deleteLike(id),
+    onSuccess: (res) => setLikeId(res.id),
+  });
 
   const handleClickLike = () => {
+    if (!isCurrentLike) {
+      mutationLike.mutate({ postId: id, isLike: true });
+      setIsShowAnimateLike(true);
+      setTimeout(() => {
+        setIsShowAnimateLike(false);
+      }, 300);
+    } else if (likeId) {
+      mutationUnlike.mutate(likeId);
+    }
     setIsCurrentLike((prev) => !prev);
-
-    // next action to req api
   };
+
   return (
     <Card className={styles.post}>
       <div className={styles.postHeader}>
@@ -49,6 +71,9 @@ const Post: React.FC<PostProps> = ({
 
       <div className={styles.postImage} onClick={handleClickLike}>
         <img src={imageUrl} alt={caption} />
+        {isShowAnimateLike && (
+          <HeartFilled className={styles.likeAnimateIcon} />
+        )}
       </div>
 
       <div className={styles.postActions}>

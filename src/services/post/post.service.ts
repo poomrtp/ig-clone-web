@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { PostData, PostQuery } from '../../types/post.type';
+import {
+  CreateLikeDataPayload,
+  CreateLikeDataResponse,
+  PostData,
+  PostQuery,
+} from '../../types/post.type';
 import { PixabayData, PixabayResponse } from '../../types/pixabay.type';
+import { PIXABAY_API, PIXABAY_API_KEY } from '../../config/pixabay.config';
+import { JSON_SERVER_API } from '../../config/json-server.config';
 
-const PIXABAY_API_KEY = process.env.REACT_APP_PIXABAY_API_KEY;
 export const getPost = async (query?: PostQuery) => {
   try {
     const pixabayPost = await getPostFromPixabay(query);
@@ -22,8 +28,10 @@ export const getPost = async (query?: PostQuery) => {
   }
 };
 
-const getPostFromPixabay = async (query?: PostQuery) => {
-  const res = await axios.get<PixabayResponse>('https://pixabay.com/api/', {
+export const getPostFromPixabay = async (
+  query?: PostQuery
+): Promise<PixabayResponse> => {
+  const res = await axios.get<PixabayResponse>(PIXABAY_API, {
     params: {
       key: PIXABAY_API_KEY,
       q: query?.search,
@@ -31,5 +39,24 @@ const getPostFromPixabay = async (query?: PostQuery) => {
       page: query?.page || 1,
     },
   });
+  return res.data;
+};
+
+export const createLike = async (
+  postData: CreateLikeDataPayload
+): Promise<CreateLikeDataResponse> => {
+  const res = await axios.post<CreateLikeDataResponse>(
+    `${JSON_SERVER_API}/likes`,
+    postData
+  );
+  return res.data;
+};
+
+export const deleteLike = async (
+  likeId: string
+): Promise<CreateLikeDataResponse> => {
+  const res = await axios.delete<CreateLikeDataResponse>(
+    `${JSON_SERVER_API}/likes/${likeId}`
+  );
   return res.data;
 };
