@@ -9,12 +9,19 @@
 .leftSidebar {
   background-color: #000000 !important;
   border-right: 1px solid #262626;
+  overflow: auto;
+  height: 100vh;
+  position: sticky;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
   display: none;
 }
 
 .rightSidebar {
   background-color: #000000 !important;
-  border-left: 1px solid #262626;
   display: none;
 }
 
