@@ -111,6 +111,7 @@ const LeftSidebar: React.FC = () => {
       <Drawer
         title="ค้นหา"
         placement="left"
+        className={styles.drawer}
         closable={{ 'aria-label': 'Close Button', closeIcon: null }}
         onClose={closeDrawer}
         open={isShowSearchDrawer}

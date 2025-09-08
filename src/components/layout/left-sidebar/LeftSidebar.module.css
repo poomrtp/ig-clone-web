@@ -51,3 +51,7 @@
 .menu :global(.ant-menu-item-icon) {
   font-size: 24px !important;
 }
+
+.drawer:global(.ant-drawer-content) {
+  border-right: 1px solid #262626 !important;
+}
