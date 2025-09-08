@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# IG Clone Web
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React project that mimics Instagram UI and features for assignment test purposes.
 
-## Available Scripts
+## Key feature
 
-In the project directory, you can run:
+- Responsive design
+- Infinite scroll
+- Interaction with post image and like button
+- Integrate with REST API
 
-### `npm start`
+## Requirements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js 22.x and npm (recommend using nvm to manage versions)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Install
 
-### `npm test`
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Environment setup
 
-### `npm run build`
+Create a `.env` file in the project root with the following variables:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# this env is for test actually should not write in file
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Mock API (json-server) base URL
+REACT_APP_JSON_SERVER_API=http://localhost:3001
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Pixabay API
+REACT_APP_PIXABAY_API=https://pixabay.com/api
+REACT_APP_PIXABAY_API_KEY=52152161-df712e8cfa2c7d5ff8239fce2
+```
 
-### `npm run eject`
+## JSON Server setup (mock backend)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- JSON Server repo and how to setup: `https://github.com/poomrtp/ig-clone-json-server`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Start and test
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+# Start the web app (http://localhost:3000)
+npm start
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Run tests in watch mode
+npm test
 
-## Learn More
+# Build production assets
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Third-party APIs/services used
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Pixabay REST API — images data source (`https://pixabay.com/api/docs/`).
+- JSON Server — mock REST backend for local development (`https://github.com/typicode/json-server`).
